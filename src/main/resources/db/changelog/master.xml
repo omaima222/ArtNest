@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+                     objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="1" author="omaima">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_demand"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="role" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="omaima">
+        <createTable tableName="post">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_demand"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="omaima">
+        <createTable tableName="offer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_demand"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="price" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="omaima">
+        <createTable tableName="commission">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_demand"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="status" type="SMALLINT"/>
+            <column name="progress" type="SMALLINT"/>
+            <column name="client_id" type="BIGINT"/>
+            <column name="artist_id" type="BIGINT"/>
+            <column name="offer_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="omaima">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="post" constraintName="FK_POST_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="6" author="omaima">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="offer" constraintName="FK_OFFER_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="7" author="omaima">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="commission" constraintName="FK_COMMISSION_CLIENT_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="8" author="omaima">
+        <addForeignKeyConstraint baseColumnNames="artist_id" baseTableName="commission" constraintName="FK_COMMISSION_ARTIST_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="9" author="omaima">
+        <addForeignKeyConstraint baseColumnNames="offer_id" baseTableName="commission" constraintName="FK_COMMISSION_ON_OFFER"
+                                 referencedColumnNames="id" referencedTableName="offer"/>
+    </changeSet>
+</databaseChangeLog>
