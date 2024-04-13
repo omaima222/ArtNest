@@ -23,6 +23,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("/artist/{id}")
+    public ResponseEntity<List<PostResponseDto>> getAllMyPosts(@PathVariable Long id){
+        List<PostResponseDto> posts = this.postService.getAllMyPosts(id);
+        return ResponseEntity.ok(posts);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<PostResponseDto> findById(@PathVariable Long id){
         PostResponseDto post = this.postService.findPostById(id);

@@ -1,7 +1,6 @@
 package com.example.artnest.services.Interfaces;
 
 import com.example.artnest.dtos.UserDto;
-import com.example.artnest.entities.User;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ValidationException;
 

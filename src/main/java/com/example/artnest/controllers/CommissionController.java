@@ -24,6 +24,12 @@ public class CommissionController {
         return ResponseEntity.ok(offers);
     }
 
+    @GetMapping("client/{id}")
+    public ResponseEntity<List<CommissionResponseDto>> getAllByClient(@PathVariable Long id){
+        List<CommissionResponseDto> offers = this.commissionService.getAllByClient(id);
+        return ResponseEntity.ok(offers);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<CommissionResponseDto> findById(@PathVariable Long id){
         CommissionResponseDto offer = this.commissionService.findCommissionById(id);

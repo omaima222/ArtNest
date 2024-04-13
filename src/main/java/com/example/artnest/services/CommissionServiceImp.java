@@ -34,6 +34,13 @@ public class CommissionServiceImp implements CommissionService {
     }
 
     @Override
+    public List<CommissionResponseDto> getAllByClient(Long client_id) {
+        User client = modelMapper.map(this.userService.findUserById(client_id), User.class);
+        List<Commission> commissions = this.commissionRepository.getAllByClient(client);
+        return commissions.stream().map(c->modelMapper.map(c, CommissionResponseDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
     public CommissionResponseDto findCommissionById(Long id) throws EntityNotFoundException {
         Optional<Commission> commission = this.commissionRepository.findById(id);
         if(!commission.isPresent()) throw new EntityNotFoundException("Commission not found !");

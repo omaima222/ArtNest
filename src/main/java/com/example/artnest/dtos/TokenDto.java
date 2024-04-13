@@ -10,4 +10,8 @@ public class TokenDto {
     @NotEmpty
     @NotBlank
     String token;
+
+    Long user_id;
+
+    String role;
 }

@@ -1,4 +1,4 @@
-package com.example.artnest.enums.exceptions;
+package com.example.artnest.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

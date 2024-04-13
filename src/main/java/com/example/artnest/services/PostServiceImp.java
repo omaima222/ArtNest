@@ -31,6 +31,13 @@ public class PostServiceImp implements PostService {
     }
 
     @Override
+    public List<PostResponseDto> getAllMyPosts(Long id) {
+        User artist = modelMapper.map(this.userService.findUserById(id), User.class);
+        List<Post> posts = this.postRepository.getAllByUser(artist);
+        return posts.stream().map(p->modelMapper.map(p, PostResponseDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
     public PostResponseDto findPostById(Long id) throws EntityNotFoundException {
         Optional<Post> post = this.postRepository.findById(id);
         if(!post.isPresent()) throw new EntityNotFoundException("Post not found !");

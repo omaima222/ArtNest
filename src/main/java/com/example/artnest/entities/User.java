@@ -38,6 +38,12 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "artist")
     private List<Commission> commissions;
 
+
+    @Override
+    public String getUsername(){
+        return this.email;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();

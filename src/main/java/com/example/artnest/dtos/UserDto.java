@@ -35,7 +35,5 @@ public class UserDto {
     @Length(min = 8)
     private String password;
     @NotNull
-    @NotEmpty
-    @NotBlank
     private Role role;
 }

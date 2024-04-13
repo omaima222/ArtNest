@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface CommissionService {
     public List<CommissionResponseDto> getAllCommissions();
+    public List<CommissionResponseDto> getAllByClient(Long client_id);
     public CommissionResponseDto findCommissionById(Long id) throws EntityNotFoundException;
     public CommissionResponseDto save(CommissionRequestDto commissionRequestDto) throws ValidationException;
     public void delete(Long id);

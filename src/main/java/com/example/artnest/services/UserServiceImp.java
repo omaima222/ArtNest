@@ -53,16 +53,16 @@ public class UserServiceImp implements UserService, AuthService {
         User user = modelMapper.map(userDto, User.class);
         user.setPassword(this.passwordEncoder.encode(userDto.getPassword()));
         if(userDto.getId()!=null) user.setId(userDto.getId());
-        this.userRepository.save(user);
-        return null;
+        return modelMapper.map(this.userRepository.save(user), UserDto.class);
     }
 
     public TokenDto signup(UserDto userDto) throws jakarta.validation.ValidationException {
         Optional<User> existingUser = this.userRepository.findByEmail(userDto.getEmail());
         if(existingUser.isPresent()) throw new ValidationException("This Email is already taken !");
-        User user = modelMapper.map(this.save(userDto), User.class);
+        UserDto savedUser = this.save(userDto);
+        User user = modelMapper.map(savedUser, User.class);
         String jwt = this.jwtService.generateToken(user);
-        return new TokenDto(jwt);
+        return new TokenDto(jwt, user.getId(), user.getRole().name());
     }
 
     public TokenDto login(AuthDto authDto) {
@@ -71,7 +71,7 @@ public class UserServiceImp implements UserService, AuthService {
         );
         User user = modelMapper.map(this.findUserByEmail(authDto.getEmail()), User.class);
         String token = jwtService.generateToken(user);
-        return new TokenDto(token);
+        return new TokenDto(token, user.getId(), user.getRole().name());
     }
 
     public void delete(Long id) {
